@@ -8,13 +8,31 @@
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
   <script type="text/babel">
     // 🐨 Make a function called `message` which returns the JSX we want to share
+    function Message({subject, greeting}) {
+      return (
+        <div className="message">
+          {greeting}, {subject}
+        </div>
+      )
+    }
 
-    // 🐨 use that function in place of the divs below with:
-    // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
+    const PropTypes = {
+      required(props, propName, componentName) {
+        if (typeof props[propName] === 'undefined') {
+          return new Error(`This ${propName} props is required`)
+        }
+      },
+    }
+
+    Message.propTypes = {
+      greeting: PropTypes.required,
+      subject: PropTypes.required,
+    }
+
     const element = (
       <div className="container">
-        <div className="message">Hello World</div>
-        <div className="message">Goodbye World</div>
+        <Message subject="World" />
+        <Message greeting="Goodbye" subject="World" />
       </div>
     )
 
