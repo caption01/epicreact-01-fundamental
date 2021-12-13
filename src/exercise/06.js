@@ -21,14 +21,7 @@ function UsernameForm({onSubmitUsername}) {
     const value = event?.target?.value
     const isValid = value === value.toLowerCase()
 
-    if (!isValid) {
-      setError('Username must be lower case')
-    }
-
-    if (isValid) {
-      setError(null)
-    }
-
+    setError(!isValid ? 'Username must be lower case' : null)
     setValue(value)
   }
 
